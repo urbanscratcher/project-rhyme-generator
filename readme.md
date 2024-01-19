@@ -1,6 +1,7 @@
 # A Rhyme Generator
-- This is a personal project on making a basic rhyme generator to learn a process of solving problems and building algorithms
-- All written by myself
+- This is a personal project on making a rhyme generator based on phonetics
+- This is to learn a process of solving problems on data structue and building algorithms
+- All codes are written by myself
 
 ## Introduction
 - My algorithm works in two main steps: parsing and searching, to find phonetic rhymes of words.
@@ -9,8 +10,7 @@
 - If matches are found, the corresponding words are shown. 
 
 ## Demo Video
-![ADS](https://github.com/urbanscratcher/project-rhyme-generator/assets/17016494/fb5c7bf6-17ca-40f2-84b3-2c1577da8ff2)
-
+[ADS.webm](https://github.com/urbanscratcher/project-rhyme-generator/assets/17016494/af613744-67bf-42ae-9101-3ee9beb33e85)
 
 ## An explanation of the original algorithms in non-technical language
 - Imagine you're looking for words that sound alike at the end, like "rhyme." To do this, we first break down every word into its sounds, distinguishing between vowels and consonants. This is called 'phonetic parsing,' and we do it in advance for a whole list of words, creating a kind of dictionary with the sounds of each word.

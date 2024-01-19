@@ -46,7 +46,7 @@ Once that's done, you can enter a word, and the system remembers it. The algorit
 - Calls prepareData to initialize data structures.
 - Calls processSearch to get user input, search for rhyming words, and display the results
 
-## A list of the data structures to be used
+## A list of the data structures used
 ### Non-primitive data structures
 1. Arrays
 - Generally, arrays are used for storing and manipulating collections of data. In my JavaScript code, arrays are implemented using dynamic arrays, which allows for flexible resizing as elements are added or removed. This is crucial for efficiently handling the changing size of data, such as the phonemes for each word in the phonetic dictionary. Also, by using arrays, the searching process is conveniently conducted because of easy access.

@@ -1,4 +1,4 @@
-# A Rhyme Generator
+# Rhyme Generator
 - This is a personal project on making a rhyme generator based on phonetics
 - This is to learn a process of solving problems on data structue and building algorithms with function programming
 - All codes are written by myself

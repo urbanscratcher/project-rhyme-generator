@@ -12,7 +12,7 @@
 ## Demo Video
 [ADS.webm](https://github.com/urbanscratcher/project-rhyme-generator/assets/17016494/af613744-67bf-42ae-9101-3ee9beb33e85)
 
-## An explanation of the original algorithms
+## Explanation of Original Algorithms
 - Imagine you're looking for words that sound alike at the end, like "rhyme." To do this, we first break down every word into its sounds, distinguishing between vowels and consonants. This is called 'phonetic parsing,' and we do it in advance for a whole list of words, creating a kind of dictionary with the sounds of each word.
 Once that's done, you can enter a word, and the system remembers it. The algorithm then takes this word and dissects it to figure out how it ends. It looks for the last vowel sound and any accompanying consonants, assuming that vowels act as anchor points for rhymes.
 - The algorithm scans through the sounds of the word from the end until it finds a vowel. For example, for the word 'cat,' it identifies the ending sound as 'æt.' Then, it compares this sound with the sounds in the pre-processed dictionary, finding words with similar endings like 'hat,' 'mat,' and 'sat.'
@@ -23,49 +23,47 @@ Once that's done, you can enter a word, and the system remembers it. The algorit
 - Although flowcharts will be helpful, to organize this massive project at a glance, I divided parts as below. I applied some principles of functional programming.
 - In step 8, the program ultimately starts by calling two main functions: 1) preparation of data and 2) processing input and search.
 1. Stack Class
-- Implements a basic stack data structure used for managing phoneme sequences.
+	- Implements a basic stack data structure used for managing phoneme sequences.
 2. File Reading and Data Preparation
-- Utilizes util.promisify to read files asynchronously.
-- Reads phonetic dictionary, phonetic symbols, and wordlist files to prepare basic dictionary data.
+	- Utilizes util.promisify to read files asynchronously.
+	- Reads phonetic dictionary, phonetic symbols, and wordlist files to prepare basic dictionary data.
 3. Data Structures
-- phonemesDictArray: Array of headwords and corresponding phoneme stacks.
-- vowelSymbolsArray: Array of vowel symbols.
-- rhymeDictArray: Array of headwords, rhyme strings, and phoneme counts.
+	- phonemesDictArray: Array of headwords and corresponding phoneme stacks.
+	- vowelSymbolsArray: Array of vowel symbols.
+	- rhymeDictArray: Array of headwords, rhyme strings, and phoneme counts.
 4. Subroutine Functions
-- Includes utility functions like splitTextlines, splitTabs, getUserInput, and excludeElement
+	- Includes utility functions like splitTextlines, splitTabs, getUserInput, and excludeElement
 5. Lv1 Procedural Functions
-- Mainly functions for processing arrays, such as makePhonemesDictionary, makeWordlist, and makeSymbolsDictionary
-- identifyRhyme: Determines the rhyme string for a given phoneme stack.
-- getMatchedRhymeDicts: Filters rhyme dictionaries based on rhyme string and phoneme count.
-- getMeaningfulWords: Filters meaningful words from the word list based on matched rhyme dictionaries.
+	- Mainly functions for processing arrays, such as makePhonemesDictionary, makeWordlist, and makeSymbolsDictionary
+	- identifyRhyme: Determines the rhyme string for a given phoneme stack.
+	- getMatchedRhymeDicts: Filters rhyme dictionaries based on rhyme string and phoneme count.
+	- getMeaningfulWords: Filters meaningful words from the word list based on matched rhyme dictionaries.
 6. Lv2 Procedural Functions
-- Mainly higher-level functions that call Lv1 functions, such as getPhonemesDictionary, getWordlist, getSymbolsDictionary, getVowelSymbols, and makeRhymeDictionary
+	- Mainly higher-level functions that call Lv1 functions, such as getPhonemesDictionary, getWordlist, getSymbolsDictionary, getVowelSymbols, and makeRhymeDictionary
 7. Lv3 Procedural Functions
-- Major procedures that handle data preparation and the search process, such as prepareData, processUserInput, setSearchParams, loopSearch, getSearchedWords, getPhonemesOf, getMoreSearchedWords, printOutput, showResult, and searchMoreOrEnd
+	- Major procedures that handle data preparation and the search process, such as prepareData, processUserInput, setSearchParams, loopSearch, getSearchedWords, getPhonemesOf, getMoreSearchedWords, printOutput, showResult, and searchMoreOrEnd
 8. Execution
-- Calls prepareData to initialize data structures.
-- Calls processSearch to get user input, search for rhyming words, and display the results
+	- Calls prepareData to initialize data structures.
+	- Calls processSearch to get user input, search for rhyming words, and display the results
 
-## A list of the data structures used
-### Non-primitive data structures
+## List of Data Structures Used
+### Non-primitive Data Structures
 1. Arrays
-- Generally, arrays are used for storing and manipulating collections of data. In my JavaScript code, arrays are implemented using dynamic arrays, which allows for flexible resizing as elements are added or removed. This is crucial for efficiently handling the changing size of data, such as the phonemes for each word in the phonetic dictionary. Also, by using arrays, the searching process is conveniently conducted because of easy access.
+	- Generally, arrays are used for storing and manipulating collections of data. In my JavaScript code, arrays are implemented using dynamic arrays, which allows for flexible resizing as elements are added or removed. This is crucial for efficiently handling the changing size of data, such as the phonemes for each word in the phonetic dictionary. Also, by using arrays, the searching process is conveniently conducted because of easy access.
 2. Stacks
-- Stacks are implemented by creating a ‘Stack’ class by using dynamic arrays in JavaScript. Stacks are utilized to make a string of phonetic rhyme. The LIFO (Last In, First Out) nature of stacks aligns well with the phonetic parsing process, where finding the vowel phoneme from the last is crucial for identifying rhymes. I use push and pop methods for this.
+	- Stacks are implemented by creating a ‘Stack’ class by using dynamic arrays in JavaScript. Stacks are utilized to make a string of phonetic rhyme. The LIFO (Last In, First Out) nature of stacks aligns well with the phonetic parsing process, where finding the vowel phoneme from the last is crucial for identifying rhymes. I use push and pop methods for this.
 
-### Primitive data structures
+### Primitive Data Structures
 1. Integers
-- Integers are used to represent counts, such as the number of phonemes in a word or the phonetic count in the rhyme dictionary. Numbers in JavaScript are versatile and suitable for these counting purposes.
+	- Integers are used to represent counts, such as the number of phonemes in a word or the phonetic count in the rhyme dictionary. Numbers in JavaScript are versatile and suitable for these counting purposes.
 2. String
-- Strings are employed to store words, phonemes, and rhyme strings. They are fundamental for representing textual data and are well-suited for tasks involving word manipulations, comparisons, and identification of phonetic patterns.
+	- Strings are employed to store words, phonemes, and rhyme strings. They are fundamental for representing textual data and are well-suited for tasks involving word manipulations, comparisons, and identification of phonetic patterns.
 3. Boolean
-- Booleans are used for logical conditions, such as checking if a word rhyme is found or if additional search iterations are needed. They provide a simple and effective way to make decisions based on the success or failure of certain operations.
+	- Booleans are used for logical conditions, such as checking if a word rhyme is found or if additional search iterations are needed. They provide a simple and effective way to make decisions based on the success or failure of certain operations.
 4. Undefined in JS
-- In JavaScript, undefined is used to represent the absence of a value. It can be employed to handle cases where certain data is expected but might not be present. For instance, if the phoneme stack of an input word is not found in the dictionary, the function may return undefined.
+	- In JavaScript, undefined is used to represent the absence of a value. It can be employed to handle cases where certain data is expected but might not be present. For instance, if the phoneme stack of an input word is not found in the dictionary, the function may return undefined.
 
-
-
-## Limitations and Suggestion of remedies
+## Limitations and Suggestions of Remedies
 1. No consideration of multiple vowel sounds of rhymes
 - Shortcoming: The current implementation assumes that rhymes are identified by one last vowel sound only, which may not cover cases where multiple vowels or syllables contribute to the rhyme.
 - Remedy: 
@@ -77,27 +75,27 @@ If the rhyme identification algorithm is improved with the consideration of mult
 The rhyme identification algorithm should be modified to recognize and account for different positions of rhyming sounds within words.
 
 3. Limits of the CMU dictionary
-- Shortcoming: The algorithm relies on a ready-made dictionary, the CMU pronouncing dictionary; it might not find a proper rhyme to humans. This dictionary maps pronunciations through a limited set of phonemic symbols, but there can always be exceptions to this rule. If the dictionary is wrong, the accuracy of the results cannot be ensured. Additionally, for words that are not registered in the dictionary, the pronunciation cannot be properly tracked. Also, since the algorithm pre-process the dictionary and stores all data in memory, an issue of space and time complexity can happen.
-- Remedy: 
-Fortunately, the CMU site says that you can obtain a phoneme list through a speech file in case a word is not in the dictionary (http://www.speech.cs.cmu.edu/tools/lextool.html). If these tools or AI voice recognition are used, the range of words that can be searched will expand and accuracy will increase. The complexity issues can be solved by providing proper data from a server as API.
+	- Shortcoming: The algorithm relies on a ready-made dictionary, the CMU pronouncing dictionary; it might not find a proper rhyme to humans. This dictionary maps pronunciations through a limited set of phonemic symbols, but there can always be exceptions to this rule. If the dictionary is wrong, the accuracy of the results cannot be ensured. Additionally, for words that are not registered in the dictionary, the pronunciation cannot be properly tracked. Also, since the algorithm pre-process the dictionary and stores all data in memory, an issue of space and time complexity can happen.
+	- Remedy: 
+	Fortunately, the CMU site says that you can obtain a phoneme list through a speech file in case a word is not in the dictionary (http://www.speech.cs.cmu.edu/tools/lextool.html). If these tools or AI voice recognition are used, the range of words that can be searched will expand and accuracy will increase. The complexity issues can be solved by providing proper data from a server as API.
 
 4. Lack of control in maximum number of output
-- Shortcoming: The source code I wrote lacks explicit control over the maximum number of rhyme outputs, potentially leading to longer execution times for larger datasets.
-- Remedy: If more functions like pagination to control the maximum number of rhyme outputs are implemented, it could prevent excessive search times and improve the responsiveness of the algorithm.
+	- Shortcoming: The source code I wrote lacks explicit control over the maximum number of rhyme outputs, potentially leading to longer execution times for larger datasets.
+	- Remedy: If more functions like pagination to control the maximum number of rhyme outputs are implemented, it could prevent excessive search times and improve the responsiveness of the algorithm.
 
 5. Lack of handling wrong input (edge cases)
-- Shortcoming: The code may not handle edge cases and invalid inputs gracefully, potentially leading to unexpected behavior or errors.
-- Remedy: When a more sophisticated validation mechanism is implemented, to handle edge cases, it can provide informative messages to users, thus preventing unintended consequences.
+	- Shortcoming: The code may not handle edge cases and invalid inputs gracefully, potentially leading to unexpected behavior or errors.
+	- Remedy: When a more sophisticated validation mechanism is implemented, to handle edge cases, it can provide informative messages to users, thus preventing unintended consequences.
 
 6. Potential stack overflows for recursive functions
-- Shortcoming: Although I set a limit, the recursive function, such as the looping search process, may lead to a stack overflow for a large number of iterations.
-- Remedy: The recursion can be optimized by using advanced techniques.
+	- Shortcoming: Although I set a limit, the recursive function, such as the looping search process, may lead to a stack overflow for a large number of iterations.
+	- Remedy: The recursion can be optimized by using advanced techniques.
 
 7. Lack of detailed error handling
-- Shortcoming: The code may not handle runtime errors or exceptions adequately.
-- Remedy: Implement robust error handling mechanisms, including try-catch blocks, to gracefully handle runtime errors and provide meaningful error messages for debugging.
+	- Shortcoming: The code may not handle runtime errors or exceptions adequately.
+	- Remedy: Implement robust error handling mechanisms, including try-catch blocks, to gracefully handle runtime errors and provide meaningful error messages for debugging.
 
-## Pseudocode of the essential part
+## Pseudocode of Essential Part
 ~~~
 Identification of Rhyme
 function IDENTIFY-RHYME(S, n, A)
@@ -106,7 +104,7 @@ function IDENTIFY-RHYME(S, n, A)
 // A is an array of all vowel phonemes
 
 // Initialize
-	new Stack T			// a temporary stack
+new Stack T			// a temporary stack
 tempSize  0			// a size(integer) of temporary stack
 phone  ""			// a string
 isPhoneVowel  FALSE	// a boolean
@@ -133,11 +131,11 @@ isPhoneVowel  FALSE	// a boolean
 			PUSH[checekdPhone]
 			if not EMPTY[T] then
 				phonephone+checkedPhone
-end if
-end for
-return phone
-end if
-return phone
+			end if
+		end for
+		return phone
+	end if
+	return phone
 end function
 ~~~
 

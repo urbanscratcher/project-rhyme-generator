@@ -1,5 +1,5 @@
 # A Rhyme Generator
-- This is a project on making a basic rhyme generator to focus on a process of solving problems and building algorithms
+- This is a personal project on making a basic rhyme generator to learn a process of solving problems and building algorithms
 - All written by myself
 
 ## Introduction
@@ -9,6 +9,7 @@
 - If matches are found, the corresponding words are shown. 
 
 ## Demo Video
+![ADS](https://github.com/urbanscratcher/project-rhyme-generator/assets/17016494/fb5c7bf6-17ca-40f2-84b3-2c1577da8ff2)
 
 
 ## An explanation of the original algorithms in non-technical language

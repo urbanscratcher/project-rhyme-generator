@@ -64,7 +64,7 @@ Once that's done, you can enter a word, and the system remembers it. The algorit
 
 
 
-## Point out any defects of your design and/or implementation. Suggest remedies for these shortcomings.
+## Limitations and Suggestion of remedies
 1. No consideration of multiple vowel sounds of rhymes
 - Shortcoming: The current implementation assumes that rhymes are identified by one last vowel sound only, which may not cover cases where multiple vowels or syllables contribute to the rhyme.
 - Remedy: 

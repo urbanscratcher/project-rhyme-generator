@@ -12,7 +12,7 @@
 ## Demo Video
 [ADS.webm](https://github.com/urbanscratcher/project-rhyme-generator/assets/17016494/af613744-67bf-42ae-9101-3ee9beb33e85)
 
-## An explanation of the original algorithms in non-technical language
+## An explanation of the original algorithms
 - Imagine you're looking for words that sound alike at the end, like "rhyme." To do this, we first break down every word into its sounds, distinguishing between vowels and consonants. This is called 'phonetic parsing,' and we do it in advance for a whole list of words, creating a kind of dictionary with the sounds of each word.
 Once that's done, you can enter a word, and the system remembers it. The algorithm then takes this word and dissects it to figure out how it ends. It looks for the last vowel sound and any accompanying consonants, assuming that vowels act as anchor points for rhymes.
 - The algorithm scans through the sounds of the word from the end until it finds a vowel. For example, for the word 'cat,' it identifies the ending sound as 'æt.' Then, it compares this sound with the sounds in the pre-processed dictionary, finding words with similar endings like 'hat,' 'mat,' and 'sat.'

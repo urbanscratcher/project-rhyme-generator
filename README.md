@@ -1,23 +1,36 @@
 # Rhyme Generator
-- This is a personal project on making a rhyme generator based on phonetics
-- This is to learn a process of solving problems on data structue and building algorithms with function programming
-- All codes are written by myself
 
-## Introduction
-- My algorithm works in two main steps: parsing and searching, to find phonetic rhymes of words.
-- It converts a user input word to phonemes and scans through the pre-processed dictionaries to find proper matches. That is, when you type in a word, the algorithm breaks it down into its phonemes, like sounds of vowels and consonants.
-- Then, it checks these phonemes against a pre-processed dictionary of phonetic words that already have their sounds broken down, to see if there is a match. The actual search looks at the phonemes from the end of the word, trying to find similar chunks of characters in the dictionary.
-- If matches are found, the corresponding words are shown. 
+January 2024
 
-## Demo Video
+This is a personal project developed for a Data Structures and Algorithms assignment, designed to generate rhymes based on pronunciation.
+
+## Demo
 [ADS.webm](https://github.com/urbanscratcher/project-rhyme-generator/assets/17016494/af613744-67bf-42ae-9101-3ee9beb33e85)
+Sure, here is your project description translated into English:
 
-## Explanation of Original Algorithms
-- Imagine you're looking for words that sound alike at the end, like "rhyme." To do this, we first break down every word into its sounds, distinguishing between vowels and consonants. This is called 'phonetic parsing,' and we do it in advance for a whole list of words, creating a kind of dictionary with the sounds of each word.
-Once that's done, you can enter a word, and the system remembers it. The algorithm then takes this word and dissects it to figure out how it ends. It looks for the last vowel sound and any accompanying consonants, assuming that vowels act as anchor points for rhymes.
-- The algorithm scans through the sounds of the word from the end until it finds a vowel. For example, for the word 'cat,' it identifies the ending sound as 'æt.' Then, it compares this sound with the sounds in the pre-processed dictionary, finding words with similar endings like 'hat,' 'mat,' and 'sat.'
-- This process repeats for every word in the dictionary, compiling a list of potential rhymes. After looking at all the words, the algorithm gives you the final list. However, I set criteria that if the number of the result is too small, less than 5, it searches again by increasing phonemes to be matched.
-- In summary, the whole program has ten steps: 1) preparing the data, 2) getting your input, 3) identifying the phonemes of your word and rhyme (the most important algorithm that can be seen in Section 3-1.), 4) matching phonemes, 5) compiling a list, 6) going through all words, 7) finalizing the rhyme list, 8) determining further search based on criteria, 9) giving you the results, and 10) ending the system.
+## Algorithm Summary
+The algorithm can be divided into two main stages: parsing and searching for phonetic rhymes.
+1. **Parsing**: When a user inputs a word, the algorithm breaks it down into phonemes such as vowels and consonants.
+2. **Searching**: It then searches a phonetic dictionary for matching words. The search starts from the end phonemes of each word and looks for the most similar phonetic segments in the entire dictionary. When a match is found, the corresponding word is displayed.
+
+## Algorithm Explanation
+- When we think of "rhyme," we usually think of words with similar ending sounds.
+- To generate such rhymes, the algorithm first breaks all words down into phonemes, distinguishing between vowels and consonants. This process is called 'phonetic parsing.' A phonetic dictionary is created in advance by parsing a large set of words, with each word having its own set of phonemes.
+- When a user inputs a word, the system remembers it. The algorithm breaks this word down to identify the ending phonemes. Here, we assume that vowels act as the key points for rhymes, so we find the last vowel and consonant sounds.
+- The algorithm scans the word from the end, searching for phonemes until it encounters a vowel. For example, for the word 'cat,' the ending phoneme is identified as 'æt.' Then it compares this sound with those in the dictionary to find words with similar ending sounds, such as 'hat,' 'mat,' and 'sat.'
+- This process is repeated for all words in the dictionary, and the matching words are stored in a list. After scanning all the words, the algorithm outputs the final list.
+- If the number of results is too small (fewer than five), the algorithm increases the matching phonemes and searches again.
+- In summary, the program consists of ten steps:
+   1) Prepare dictionary data
+   2) Receive input
+   3) Identify word phonemes
+   4) Search the dictionary for matching phonemes
+   5) Store matches in the rhyme list
+   6) Repeat steps 4-5 for all words in the dictionary
+   7) Finalize the rhyme list
+   8) Decide whether to conduct additional searches based on criteria
+   9) Output results
+   10) System termination
 
 ## Whole Structure of Source Code in Sequence
 - Although flowcharts will be helpful, to organize this massive project at a glance, I divided parts as below. I applied some principles of functional programming.

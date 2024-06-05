@@ -6,7 +6,6 @@ This is a personal project developed for a Data Structures and Algorithms assign
 
 ## Demo
 [ADS.webm](https://github.com/urbanscratcher/project-rhyme-generator/assets/17016494/af613744-67bf-42ae-9101-3ee9beb33e85)
-Sure, here is your project description translated into English:
 
 ## Algorithm Summary
 The algorithm can be divided into two main stages: parsing and searching for phonetic rhymes.

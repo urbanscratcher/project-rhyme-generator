@@ -6,7 +6,8 @@
 
 ## 시연
 
-[ADS.webm](https://github.com/urbanscratcher/project-rhyme-generator/assets/17016494/af613744-67bf-42ae-9101-3ee9beb33e85)
+<video src="https://github.com/urbanscratcher/project-rhyme-generator/assets/17016494/af613744-67bf-42ae-9101-3ee9beb33e85" controls ></video>
+
 
 ## 알고리즘 요약
 

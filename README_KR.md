@@ -35,68 +35,128 @@
    9) 결과 출력
    10) 시스템 종료
 
-## 전체 소스 코드 구조
+## 코드 구조
 
-- 이 대규모 프로젝트를 한눈에 정리하기 위해 파트를 아래와 같이 나눴습니다. 함수형 프로그래밍 원칙을 일부 적용했습니다.
-- 8단계에서 프로그램은 두 가지 주요 함수, 1) 데이터 준비와 2) 입력 처리 및 검색을 호출하여 시작합니다.
+- 이 프로젝트를 한눈에 정리하기 위해 파트를 아래와 같이 나눴습니다. 함수형 프로그래밍 원칙을 일부 적용했습니다.
+- 프로그램은 2가지 주요 함수, 1) 데이터 준비와 2) 입력 처리 및 검색을 호출하며 시작합니다.
 
-1. 스택 클래스
-   - 음소 시퀀스를 관리하기 위한 기본 스택 데이터 구조를 구현합니다.
+1. 스택(`Stack`) 클래스 준비
+   - 음소 시퀀스를 관리하기 위해 스택 데이터 구조를 구현합니다.
 2. 파일 읽기 및 데이터 준비
-   - util.promisify를 사용하여 파일을 비동기적으로 읽습니다.
+   - `util.promisify`를 사용하여 파일을 비동기적으로 읽습니다.
    - 음성 사전, 음성 기호, 단어 목록 파일을 읽어 기본 사전 데이터를 준비합니다.
 3. 데이터 구조
-   - phonemesDictArray: 헤드워드와 해당 음소 스택의 배열.
-   - vowelSymbolsArray: 모음 기호 배열.
-   - rhymeDictArray: 헤드워드, 라임 문자열 및 음소 수의 배열.
+   - `phonemesDictArray`: 헤드워드와 해당 음소 스택의 배열.
+   - `vowelSymbolsArray`: 모음 기호 배열.
+   - `rhymeDictArray`: 헤드워드, 라임 문자열 및 음소 수의 배열.
 4. 서브루틴 함수
-   - splitTextlines, splitTabs, getUserInput, excludeElement와 같은 유틸리티 함수를 포함합니다.
+   - `splitTextlines`, `splitTabs`, `getUserInput`, `excludeElement`와 같은 유틸리티 함수가 포함됩니다.
 5. 1단계 절차 함수
-   - 주로 배열을 처리하는 함수로, makePhonemesDictionary, makeWordlist, makeSymbolsDictionary 등이 있습니다.
-   - identifyRhyme: 주어진 음소 스택의 라임 문자열을 결정합니다.
-   - getMatchedRhymeDicts: 라임 문자열과 음소 수를 기반으로 라임 사전을 필터링합니다.
-   - getMeaningfulWords: 일치하는 라임 사전을 기반으로 의미 있는 단어를 필터링합니다.
+   - 주로 배열을 처리하는 함수로, `makePhonemesDictionary`, `makeWordlist`, `makeSymbolsDictionary` 등이 있습니다.
+   - `identifyRhyme`: 주어진 음소 스택의 라임 문자열을 결정합니다.
+   - `getMatchedRhymeDicts`: 라임 문자열과 음소 수를 기반으로 라임 사전을 필터링합니다.
+   - `getMeaningfulWords`: 일치하는 라임 사전을 기반으로 의미 있는 단어를 필터링합니다.
 6. 2단계 절차 함수
-   - 주로 1단계 함수를 호출하는 고수준 함수로, getPhonemesDictionary, getWordlist, getSymbolsDictionary, getVowelSymbols, makeRhymeDictionary 등이 있습니다.
+   - 주로 1단계 함수를 호출하는 고차 함수로, `getPhonemesDictionary`, `getWordlist`, `getSymbolsDictionary`, `getVowelSymbols`, `makeRhymeDictionary` 등이 있습니다.
 7. 3단계 절차 함수
-   - 데이터 준비 및 검색 프로세스를 처리하는 주요 절차로, prepareData, processUserInput, setSearchParams, loopSearch, getSearchedWords, getPhonemesOf, getMoreSearchedWords, printOutput, showResult, searchMoreOrEnd 등이 있습니다.
+   - 데이터 준비 및 검색 프로세스를 처리하는 절차적 함수로, `prepareData`, `processUserInput`, `setSearchParams`, `loopSearch`, `getSearchedWords`, `getPhonemesOf`, `getMoreSearchedWords`, `printOutput`, `showResult`, `searchMoreOrEnd` 등이 있습니다.
 8. 실행
-   - prepareData를 호출하여 데이터 구조를 초기화합니다.
-   - processSearch를 호출하여 사용자 입력을 받고, 라임 단어를 검색하고, 결과를 표시합니다.
+   - `prepareData`를 호출하여 데이터 구조를 초기화합니다.
+   - `processSearch`를 호출하여 사용자 입력을 받고, 라임 단어를 검색하고, 결과를 표시합니다.
 
-## 사용된 데이터 구조 목록
-
-### 비원시 데이터 구조
+## 사용된 자료 구조
+### 사용자 정의(non-primitive) 자료 구조
 
 1. 배열
-   - 일반적으로 배열은 데이터 컬렉션을 저장하고 조작하는 데 사용됩니다. JavaScript 코드에서는 동적 배열을 사용하여 배열을 구현하며, 이는 요소가 추가되거나 제거될 때 유연하게 크기를 조절할 수 있습니다. 이는 음성 사전에서 각 단어의 음소와 같이 크기가 변하는 데이터를 효율적으로 처리하는 데 중요합니다. 또한, 배열을 사용하면 검색 과정에서 접근이 용이합니다.
+   - 일반적으로 배열은 데이터 컬렉션을 저장하고 조작하는 데 사용됩니다. JavaScript 코드에서는 동적 배열을 통해 배열이 구현되는데, 이는 요소가 추가되거나 제거될 때 유연하게 크기를 조절할 수 있습니다. 이는 음성 사전에서 각 단어의 음소와 같이 크기가 변하는 데이터를 처리하는 데 유용합니다. 또한, 배열을 사용하면 검색 과정에서 접근이 용이합니다.
 2. 스택
-   - 스택은 JavaScript에서 동적 배열을 사용하여 'Stack' 클래스를 생성함으로써 구현됩니다. 스택은 음성 라임 문자열을 만들기 위해 사용됩니다. LIFO(Last In, First Out) 특성은 라임을 식별하기 위해 마지막 모음 음소를 찾는 과정과 잘 맞습니다. 저는 이를 위해 push 및 pop 메서드를 사용합니다.
+   - 스택은 JavaScript에서 동적 배열을 사용해 `Stack` 클래스를 생성함으로써 구현됩니다. 스택은 음성 라임 문자열을 만들기 위해 사용됩니다. 스택은 LIFO(Last In, First Out)라는 특성을 가지고 있어 마지막 모음 음소를 찾을 때 유용할 수 있습니다. 이를 위해 `push`, `pop` 메서드를 사용합니다.
 
-### 원시 데이터 구조
+### 기본(primitive) 자료 구조
 
 1. 정수
-   - 정수는 단어의 음소 수 또는 라임 사전의 음소 수와 같은 개수를 나타내는 데 사용됩니다. JavaScript의 숫자는 이러한 카운팅 목적에 적합하고 유연합니다.
+   - 단어의 음소 수나 라임 사전의 음소 수와 같은 개수를 나타내는 데 사용됩니다.
 2. 문자열
-   - 문자열은 단어, 음소 및 라임 문자열을 저장하는 데 사용됩니다. 문자열은 텍스트 데이터를 표현하는 데 기본적이며, 단어 조작, 비교 및 음성 패턴 식별 작업에 적합합니다.
+   - 단어, 음소 및 라임 문자열을 저장하는 데 사용됩니다. 문자열은 텍스트 데이터를 표현하기 위한 기본 자료 구조이며, 단어 조작, 비교 및 음성 패턴 식별 작업에 적합합니다.
 3. 부울
-   - 부울은 라임을 찾았는지 여부나 추가 검색 반복이 필요한지 여부를 확인하는 논리 조건에 사용됩니다. 이는 특정 작업의 성공 또는 실패에 따라 결정을 내리는 간단하고 효과적인 방법을 제공합니다.
-4. 정의되지 않음 (Undefined)
-   - JavaScript에서 undefined는 값의 부재를 나타내는 데 사용됩니다. 이는 특정 데이터가 기대되지만 존재하지 않을 수 있는 경우를 처리하는 데 사용됩니다. 예를 들어, 입력 단어의 음소 스택이 사전에서 발견되지 않으면 함수는 undefined를 반환할 수 있습니다.
+   - 부울은 라임을 찾았는지 여부나 추가 검색 반복이 필요한지 여부를 확인하는 논리 조건에 사용됩니다. 이를 통해 특정 작업의 성공 여부에 따른 작업을 실행할 수 있습니다.
+4. 정의되지 않음 (`undefined`)
+   - JavaScript에서 `undefined`는 값의 부재를 나타내는 데 사용됩니다. 이는 특정 데이터가 기대되지만, 존재하지 않을 수 있는 경우를 처리하는 데 사용됩니다. 예를 들어, 입력 단어의 음소 스택이 사전에서 발견되지 않으면 함수는 `undefined`를 반환할 수 있습니다.
 
-## 한계점 및 개선 방안
+## 한계점 및 개선안
 
-1. 여러 모음 소리의 라임 고려 부족
+1. 여러 모음 소리의 라임 고려가 미흡할 수 있습니다.
+- 한계점: 현재 코드는 마지막 모음 소리 하나만으로 라임을 식별한다고 가정하여, 여러 모음이나 음절이 라임을 될 수 있는 경우를 배제하고 있습니다.
+- 개선안: 라임 식별 알고리즘을 여러 모음을 고려하도록 개선하면 더 포괄적인 라임 매칭이 가능합니다. 그러나 데이터가 복잡해질수록 이를 출력하는 방법도 고려해야 합니다.
 
-- 한계점: 현재 구현은 마지막 모음 소리 하나만으로 라임을 식별한다고 가정하여, 여러 모음이나 음절이 라임에 기여하는 경우를 다루지 못할 수 있습니다.
-- 개선 방안:
-  라임 식별 알고리즘을 여러 모음을 고려하도록 개선하면 더 포괄적인 라임 매칭이 가능합니다. 그러나 데이터가 복잡해질수록 이를 출력하는 방법도 고려해야 합니다.
+2. 다른 위치의 라임을 식별하지 못합니다. (예: catXXX, XXXcatXXX)
+- 한계점: 이 알고리즘은 다른 위치의 라임을 고려하지 않아 또다른 라임 패턴을 놓칠 수 있습니다.
+- 개선안: 라임 식별 알고리즘을 수정하여 단어 내 라임 소리의 다양한 위치를 인식하고 고려할 수 있도록 해야 합니다.
 
-2. 위치 고려 부족 (예: catXXX, XXXcatXXX)
+3. CMU 사전 자체에 한계점이 있을 수 있습니다.
+- 한계점: 이 알고리즘은 CMU 발음 사전에 의존하기 때문에, 인간이 생각하는 적절한 라임을 찾지 못할 수 있습니다. CMU 사전가 발음을 맵핑하는 음소들은 제한적이며, 항상 예외가 있을 수 있습니다. 사전이 잘못된 경우 결과의 정확성을 보장할 수 없습니다. 또한, 사전에 등록되지 않은 단어의 경우 발음을 제대로 추적할 수 없습니다. 그리고 이 알고리즘은 프로그램이 시작되기 전에 사전 데이터를 가공하고, 그 모든 데이터를 메모리에 저장하기 때문에 공간 및 시간 복잡성 문제가 발생할 수 있습니다.
+- 개선안: 다행히 CMU 사이트에서는 사전에 없는 단어의 경우 음성 파일을 통해 음소 목록을 얻을 수 있다고 명시하고 있습니다 (http://www.speech.cs.cmu.edu/tools/lextool.html). 이러한 도구나 AI 음성 인식을 사용하면 검색할 수 있는 단어의 범위가 확장되고 정확성이 향상될 것입니다. 복잡성 문제는 API 서버에서 가공된 사전 데이터를 제공함으로써 해결할 수 있습니다.
 
-- 한계점: 알고리즘은 단어 내 라임 소리의 위치 변형을 고려하지 않아 특정 라임 패턴을 놓칠 수 있습니다.
-- 개선 방안:
-  라임 식별 알고리즘을 수정하여 단어 내 라임 소리의 다양한 위치를 인식하고 고려할 수 있도록 해야 합니다.
+4. 최대 라임 출력 수를 제어하는 기능이 필요할 수 있습니다.
+- 한계점: 현재 작성한 소스 코드에는 최대 라임 출력 수를 제어하는 기능이 없어 실행 시간이 길어질 수 있습니다.
+- 개선안: 페이지네이션과 같이 최대 출력 수를 제어하는 기능이 추가되면, 검색 시간이 길어지는 것을 방지하고, 알고리즘의 반응성을 향상시킬 수 있습니다.
 
-3. CMU 사전의 한계
-   - 한계점: 알고리즘은 CMU 발음 사전이라는 기성 사전에 의존하므로, 사람들에게 적절한 라임을 찾지 못할 수 있습니다. 이 사전은 제한된 음소 기호 집합을 통해 발음을 매핑하지만, 항상 이 규칙에 예외가 있을 수 있습니다. 사전이 잘못된
+5. 잘못된 입력 처리(엣지 케이스 처리)가 미흡할 수 있습니다.
+- 한계점: 엣지 케이스와 유효하지 않은 입력을 처리하는 부분이 없기 때문에 예기치 않은 동작이나 오류가 발생할 수 있습니다.
+- 개선안: 정교한 입력 검증 로직을 도입해 통해 엣지 케이스를 처리하고, 사용자에게 에러 메시지를 제공함으로써 의도치 않은 결과를 방지할 수 있습니다.
+
+6. 재귀 함수의 스택 오버플로우 가능성이 있습니다.
+- 한계점: 제한을 설정해두기는 했지만, 코드 상의 재귀 함수(예: 검색 과정)가 스택 오버플로우를 일으킬 수 있습니다.
+- 개선안: 최적화된 재귀 함수 알고리즘을 사용해 개선할 수 있습니다.
+
+7. 상세한 오류 처리가 미흡할 수 있습니다.
+- 한계점: 코드가 런타임 오류나 예외를 적절하게 처리하지 못할 수 있습니다.
+- 개선안: `try-catch` 블록 등을 통해 오류 처리 메커니즘을 구현함으로써 런타임 오류를 처리하고, 디버깅용 오류 메시지를 제공할 수 있습니다.
+
+## 의사코드
+```
+function IDENTIFY-RHYME(S, n, A)
+// S is a stack of the phonemes
+// n is the length of S
+// A is an array of all vowel phonemes
+
+// Initialize
+new Stack T			// a temporary stack
+tempSize  0			// a size(integer) of temporary stack
+phone  ""			// a string
+isPhoneVowel  FALSE	// a boolean
+
+// Iterate over the phonemes stack to find the last chunk of phonemes
+	for i=n-1 downto 0 do
+		phone POP[S]
+		PUSH[S, T]
+		tempSize  tempSize+1
+		for j=0 to n-1
+			if A[j]= phone then
+				isPhoneVowel  TRUE 
+				break
+			end if
+		end for
+		if isPhoneVowel=TRUE then
+			break
+		end if
+	end for
+	if isPhoneVowel=TRUE then
+		for k=tempSize-1 downto 0 do
+			checekdPhone""		// a string
+			checekdPhonePOP[T]
+			PUSH[checekdPhone]
+			if not EMPTY[T] then
+				phonephone+checkedPhone
+			end if
+		end for
+		return phone
+	end if
+	return phone
+end function
+```
+
+## 참고 자료
+- [프린스턴 영어 단어](https://introcs.cs.princeton.edu/java/data/wordlist.txt)
+- [CMU 사전(CMU 사전 웹사이트에서 제공하는 표)](http://www.speech.cs.cmu.edu/cgi-bin/cmudict)
+- 참고: CMU 사전의 모든 단어를 배열로 변환한 후, 각 단어에 대한 라임을 처리했습니다. CMU 사전의 단어가 오래되고 이상한 단어가 포함되어 있어, 결과를 프린스턴 영어 단어 목록을 통해 필터링했습니다.

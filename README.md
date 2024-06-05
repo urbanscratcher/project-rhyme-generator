@@ -5,7 +5,7 @@ January 2024
 This is a personal project developed for a Data Structures and Algorithms assignment, designed to generate rhymes based on pronunciation.
 
 ## Demo
-[ADS.webm](https://github.com/urbanscratcher/project-rhyme-generator/assets/17016494/af613744-67bf-42ae-9101-3ee9beb33e85)
+<video src="https://github.com/urbanscratcher/project-rhyme-generator/assets/17016494/af613744-67bf-42ae-9101-3ee9beb33e85" controls ></video>
 
 ## Algorithm Summary
 The algorithm can be divided into two main stages: parsing and searching for phonetic rhymes.
